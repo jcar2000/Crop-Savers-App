@@ -19,12 +19,12 @@ public class InfoPage extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openHomePage();
+                goBack();
             }
         });
     }
 
-    public void openHomePage() {
+    public void goBack() {
         finish();
     }
 }

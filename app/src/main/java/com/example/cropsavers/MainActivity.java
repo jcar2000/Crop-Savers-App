@@ -16,12 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Buttons /////////////////////////////////////////////////////
         // button logic for begin button
         beginButton = findViewById(R.id.beginButton);
         beginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openImagePage();
+                openSelectPage();
             }
         });
 
@@ -33,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 openInfoPage();
             }
         });
+        ////////////////////////////////////////////////////////////////
     }
 
-    public void openImagePage() {
-        Intent intent = new Intent(this, ImagePage.class);
+    public void openSelectPage() {
+        Intent intent = new Intent(this, SpeciesPage.class);
         startActivity(intent);
     }
 

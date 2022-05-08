@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CropSavers">
         <activity
+            android:name=".SpeciesPage"
+            android:exported="false" />
+        <activity
             android:name=".InfoPage"
             android:exported="false" />
         <activity
