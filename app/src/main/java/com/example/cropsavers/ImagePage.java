@@ -12,6 +12,7 @@ public class ImagePage extends AppCompatActivity {
     private Button homeButton;
     private Button infoButton;
     private Button backButton;
+    private Button testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,14 @@ public class ImagePage extends AppCompatActivity {
             }
         });
 
+        // button logic for test button
+        infoButton = findViewById(R.id.uploadPhotoButton);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTestPage();
+            }
+        });
         ////////////////////////////////////////////////////////////////////////////
     }
 
@@ -67,5 +76,10 @@ public class ImagePage extends AppCompatActivity {
 
     public void goBack() {
         finish();
+    }
+
+    public void openTestPage() {
+        Intent intent = new Intent(this, ResultsPage.class);
+        startActivity(intent);
     }
 }

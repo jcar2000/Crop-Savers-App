@@ -8,22 +8,22 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/green_top_flat"
-        android:layout_marginBottom="20sp"/>
+        app:srcCompat="@drawable/green_top_flat" />
 
     <TextView
         android:id="@+id/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView7"
+        android:layout_marginBottom="20sp"
         android:layout_centerHorizontal="true"
         android:text="Select Crop Species"
-        android:layout_marginBottom="20sp"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/grid"
