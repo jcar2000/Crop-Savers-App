@@ -58,18 +58,16 @@
         app:layout_constraintVertical_bias="0.027" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/resultsImage"
         android:layout_width="380dp"
         android:layout_height="380dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/image_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.058"
-        app:srcCompat="@drawable/template_leaf_image"/>
+        app:layout_constraintVertical_bias="0.058"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -81,10 +79,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.255"
+        app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/resultsImage"
+        app:layout_constraintVertical_bias="0.005" />
 
     <TextView
         android:id="@+id/textView9"
@@ -106,13 +104,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="98.13% - Black Rot
-        \n1.23%   - Cedar Rust
-        \n0.36%   - Apple Scab"
+        android:text="98.13% - Template Disease 1
+        \n1.23%   - Template Disease 2
+        \n0.36%   - Template Disease 3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.0" />
@@ -121,9 +119,9 @@
         android:id="@+id/textView11"
         android:layout_width="323dp"
         android:layout_height="100dp"
-        android:text="Black rot is a fungus disease that can cause serious losses in apple orchards,
-especially in warm, humid areas.Severe leaf spotting can result in defoliation that weakens the tree,
-infected fruit become unmarketable, and limb cankers can girdle and eventually kill entire branches."
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

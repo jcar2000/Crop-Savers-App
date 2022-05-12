@@ -3,9 +3,12 @@ package com.example.cropsavers;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class ResultsPage extends AppCompatActivity {
     private Button homeButton;
@@ -16,6 +19,12 @@ public class ResultsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_page);
 
+        if(getIntent().hasExtra("predictionImage")) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(
+                    getIntent().getByteArrayExtra("predictionImage"), 0, getIntent().getByteArrayExtra("predictionImage").length);
+            ImageView imageView = findViewById(R.id.resultsImage);
+            imageView.setImageBitmap(bitmap);
+        }
 
         //Buttons //////////////////////////////////////////////////////////////////
         // button logic for home button

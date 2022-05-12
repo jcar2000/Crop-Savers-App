@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class ImagePage extends AppCompatActivity {
     private Button homeButton;
@@ -23,6 +29,8 @@ public class ImagePage extends AppCompatActivity {
     private static final int pic_id = 123;
     Button camera_open_id;
     ImageView click_image_id;
+
+    Bitmap photo = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +143,12 @@ public class ImagePage extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, ResultsPage.class);
+
+            //convert bitmap image to byteArray
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+            intent.putExtra("predictionImage", bs.toByteArray());
+
             startActivity(intent);
         }
     }
@@ -150,11 +164,12 @@ public class ImagePage extends AppCompatActivity {
 
             // BitMap is data structure of image file
             // which store the image in memory
-            Bitmap photo = (Bitmap) data.getExtras()
+            Bitmap img = (Bitmap) data.getExtras()
                     .get("data");
+            photo = img;
             click_image_id.setBackground(null);
             // Set the image in imageview for display
-            click_image_id.setImageBitmap(photo);
+            click_image_id.setImageBitmap(img);
         }
     }
 }
