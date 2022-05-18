@@ -25,7 +25,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -38,7 +39,8 @@
         \n\n4) Once the photo has been added, click PREDICT to be taken to the classification results page"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/textView2" />
 
     <Button
         android:id="@+id/backButton"
@@ -56,9 +58,10 @@
         android:text="Format of photos:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -71,7 +74,6 @@
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.537"
         app:srcCompat="@drawable/good_leaf_format" />
 
     <ImageView
@@ -81,9 +83,9 @@
         android:layout_marginStart="32dp"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.539"
         app:srcCompat="@drawable/bad_leaf_format" />
 
 
