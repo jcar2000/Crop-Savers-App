@@ -12,18 +12,23 @@
         android:theme="@style/Theme.CropSavers">
         <activity
             android:name=".ResultsPage"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".SpeciesPage"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".InfoPage"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".ImagePage"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="userPortrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
