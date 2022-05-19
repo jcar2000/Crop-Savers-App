@@ -22,7 +22,7 @@ public class ResultsPage extends AppCompatActivity {
     private Button infoButton;
 
     private float[] predictionsArray;
-    private String[] predictionLabels = new String[5];
+    private String[] predictionLabels = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class ResultsPage extends AppCompatActivity {
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open(labelFileName)));
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 10; i++) {
                 String label = reader.readLine();
                 predictionLabels[i] = label;
             }

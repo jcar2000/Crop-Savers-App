@@ -190,14 +190,14 @@ public class ImagePage extends AppCompatActivity {
                 TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
                 inputFeature0.loadBuffer(byteBuffer);
 
-                if (species == "Apple") {
+                if (species.contentEquals("Apple")) {
                     MobileAppleModel model = MobileAppleModel.newInstance(this);
                     MobileAppleModel.Outputs outputs = model.process(inputFeature0);
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
                     resultsArray = outputFeature0.getFloatArray();
                     model.close();
                 }
-                else if (species == "Cherry") {
+                else if (species.contentEquals("Cherry")) {
                     MobileCherryModel model = MobileCherryModel.newInstance(this);
                     MobileCherryModel.Outputs outputs = model.process(inputFeature0);
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
@@ -213,10 +213,14 @@ public class ImagePage extends AppCompatActivity {
                     model.close();
                 }
 
+                for (int i = 0; i < resultsArray.length; i++) {
+                    Log.d("myapp", String.valueOf(resultsArray[i]));
+                }
+
                 Intent intent = new Intent(this, ResultsPage.class);
                 //convert bitmap image to byteArray
                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                photo.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+                photo.compress(Bitmap.CompressFormat.JPEG, 100, bs);
                 intent.putExtra("predictionImage", bs.toByteArray());
                 intent.putExtra("predictions", resultsArray);
                 intent.putExtra("species", species);
