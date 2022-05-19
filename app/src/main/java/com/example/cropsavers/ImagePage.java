@@ -252,10 +252,10 @@ public class ImagePage extends AppCompatActivity {
         }
         else if (requestCode == 124)
         {
-            // Get the url of the image from data
-            Uri selectedImageUri = data.getData();
-            if (null != selectedImageUri) {
-                try {
+            try {
+                if(data != null){
+                    // Get the url of the image from data
+                    Uri selectedImageUri = data.getData();
                     // update the preview image in the layout
                     Bitmap img = null;
                     img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
@@ -263,8 +263,8 @@ public class ImagePage extends AppCompatActivity {
                     click_image_id.setBackground(null);
                     click_image_id.setImageBitmap(img);
                 }
-                catch (IOException e) {}
             }
+            catch (IOException e) {}
         }
     }
 
