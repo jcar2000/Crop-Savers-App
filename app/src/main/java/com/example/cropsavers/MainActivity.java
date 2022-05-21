@@ -7,16 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.ml.modeldownloader.CustomModel;
-import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions;
-import com.google.firebase.ml.modeldownloader.DownloadType;
-import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader;
-
-import org.tensorflow.lite.Interpreter;
-
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity {
     private Button beginButton;
     private Button infoButton;
