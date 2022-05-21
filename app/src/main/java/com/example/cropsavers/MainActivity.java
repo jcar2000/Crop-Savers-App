@@ -1,15 +1,12 @@
 package com.example.cropsavers;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
-    private Button beginButton;
-    private Button infoButton;
 
     // ON PAGE CREATE
     @Override
@@ -17,25 +14,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         // Buttons /////////////////////////////////////////////////////
         // button logic for begin button
-        beginButton = findViewById(R.id.beginButton);
-        beginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSelectPage();
-            }
-        });
+        Button beginButton = findViewById(R.id.beginButton);
+        beginButton.setOnClickListener(v -> openSelectPage());
 
         // button logic for begin button
-        infoButton = findViewById(R.id.infoButton);
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openInfoPage();
-            }
-        });
+        Button infoButton = findViewById(R.id.infoButton);
+        infoButton.setOnClickListener(v -> openInfoPage());
         ////////////////////////////////////////////////////////////////
     }
 

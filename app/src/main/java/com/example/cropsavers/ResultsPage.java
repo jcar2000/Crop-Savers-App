@@ -1,28 +1,26 @@
 package com.example.cropsavers;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 public class ResultsPage extends AppCompatActivity {
-    private Button homeButton;
-    private Button infoButton;
 
     // Arrays for predictions and their corresponding labels
     private float[] predictionsArray;
-    private String[] predictionLabels = new String[10];
+    private final String[] predictionLabels = new String[10];
 
     // ON PAGE CREATE
     @Override
@@ -43,22 +41,12 @@ public class ResultsPage extends AppCompatActivity {
 
         //Buttons //////////////////////////////////////////////////////////////////
         // button logic for home button
-        homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openHomePage();
-            }
-        });
+        Button homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> openHomePage());
 
         // button logic for info button
-        infoButton = findViewById(R.id.infoButton);
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openInfoPage();
-            }
-        });
+        Button infoButton = findViewById(R.id.infoButton);
+        infoButton.setOnClickListener(v -> openInfoPage());
         ///////////////////////////////////////////////////////////////////////////
     }
 
@@ -97,17 +85,17 @@ public class ResultsPage extends AppCompatActivity {
             predictionsArray = sortPredictions(getIntent().getFloatArrayExtra("predictions"));
         }
 
-        String fullPredictionString = "";
+        StringBuilder fullPredictionString = new StringBuilder();
         for (int i = 0; i<3; i++) {
-            String data = String.format("%s: %1.2f", predictionLabels[i], predictionsArray[i]) + "%";
+            String data = String.format(Locale.getDefault(), "%s: %1.2f", predictionLabels[i], predictionsArray[i]) + "%";
             if (i == 2) {
-                fullPredictionString = fullPredictionString + data;
+                fullPredictionString.append(data);
             } else {
-                fullPredictionString = fullPredictionString + data + "\n";
+                fullPredictionString.append(data).append("\n");
             }
         }
         TextView predictionText = findViewById(R.id.Prediction1);
-        predictionText.setText(fullPredictionString);
+        predictionText.setText(fullPredictionString.toString());
     }
 
 
@@ -115,8 +103,8 @@ public class ResultsPage extends AppCompatActivity {
     private float[] sortPredictions(float[] predictArray) {
         for (int i = 0; i < predictArray.length; i++) {
             for (int j = i + 1; j < predictArray.length; j++) {
-                float tmp = 0;
-                String ltmp = null;
+                float tmp;
+                String ltmp;
                 if (predictArray[i] < predictArray[j]) {
                     tmp = predictArray[i];
                     ltmp = predictionLabels[i];

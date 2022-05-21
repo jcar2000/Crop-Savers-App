@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,57 +52,26 @@ public class ImagePage extends AppCompatActivity {
         //Buttons //////////////////////////////////////////////////////////////////
         // button logic for home button
         Button homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openHomePage();
-            }
-        });
+        homeButton.setOnClickListener(v -> openHomePage());
 
         // button logic for info button
         Button infoButton = findViewById(R.id.infoButton);
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openInfoPage();
-            }
-        });
+        infoButton.setOnClickListener(v -> openInfoPage());
 
         // button logic for back button
         Button backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack();
-            }
-        });
+        backButton.setOnClickListener(v -> goBack());
 
         // button logic for photo upload button
         Button uploadButton = findViewById(R.id.uploadPhotoButton);
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPhotoLibrary();
-            }
-        });
+        uploadButton.setOnClickListener(v -> openPhotoLibrary());
 
         // button logic for predict button
         Button predictButton = findViewById(R.id.predictButton);
-        predictButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPredictionsPage();
-            }
-        });
+        predictButton.setOnClickListener(v -> openPredictionsPage());
 
         Button takePhotoButton = findViewById(R.id.takePhotoButton);
-        takePhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                openCameraFunction();
-            }
-        });
+        takePhotoButton.setOnClickListener(v -> openCameraFunction());
         ////////////////////////////////////////////////////////////////////////////
     }
 
@@ -236,7 +204,7 @@ public class ImagePage extends AppCompatActivity {
                     // Get the url of the image from data
                     Uri selectedImageUri = data.getData();
                     // update the preview image in the layout
-                    Bitmap img = null;
+                    Bitmap img;
                     img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
                     photo = img;
                     // Set the image in imageview for display

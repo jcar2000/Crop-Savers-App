@@ -1,13 +1,11 @@
 package com.example.cropsavers;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class InfoPage extends AppCompatActivity {
-    private Button backButton;
 
     // ON PAGE CREATE
     @Override
@@ -16,13 +14,8 @@ public class InfoPage extends AppCompatActivity {
         setContentView(R.layout.activity_info_page);
 
         // Logic for back button
-        backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack();
-            }
-        });
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> goBack());
     }
 
     public void goBack() {
