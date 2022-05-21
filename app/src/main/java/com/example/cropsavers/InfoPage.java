@@ -10,11 +10,13 @@ import android.widget.Button;
 public class InfoPage extends AppCompatActivity {
     private Button backButton;
 
+    // ON PAGE CREATE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_page);
 
+        // Logic for back button
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

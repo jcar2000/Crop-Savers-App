@@ -10,12 +10,13 @@ import android.widget.Button;
 public class SpeciesPage extends AppCompatActivity {
     private Button backButton;
 
+    // ON PAGE CREATE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_species_page);
 
-        // Button logic
+        // Logic for back button
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,6 +26,7 @@ public class SpeciesPage extends AppCompatActivity {
         });
     }
 
+    // Pass selected species type to image page depending on card clicked
     public void cardClick(View view) {
         Intent intent = new Intent(this, ImagePage.class);
         switch (view.getId()) {
@@ -56,7 +58,6 @@ public class SpeciesPage extends AppCompatActivity {
                 intent.putExtra("species", "Tomato");
                 break;
         }
-
         startActivity(intent);
     }
 
