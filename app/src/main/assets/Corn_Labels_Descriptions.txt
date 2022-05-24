@@ -1,0 +1,5 @@
+No Leaf Detected;The captured image does not contain an easily identifiable leaf.\nPlease start again with a new image...;None
+Gray Leaf Spot;;
+Common Rust;;
+Northern Leaf Blight;;
+Healthy Leaf;No disease was detected, the captured leaf is healthy.;None

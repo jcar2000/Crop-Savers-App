@@ -20,7 +20,7 @@ public class ResultsPage extends AppCompatActivity {
 
     // Arrays for predictions and their corresponding labels
     private float[] predictionsArray;
-    private final String[] predictionLabels = new String[10];
+    private final String[] predictionLabelsAndDesc = new String[10];
 
     // ON PAGE CREATE
     @Override
@@ -65,15 +65,15 @@ public class ResultsPage extends AppCompatActivity {
         // get species type from last screen and set label file name with it
         Intent previousPage = getIntent();
         String species = previousPage.getStringExtra("species");
-        String labelFileName = species + "_Labels.txt";
+        String labelFileName = species + "_Labels_Descriptions.txt";
 
         // get labels from text file
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open(labelFileName)));
             for (int i = 0; i < 10; i++) {
-                String label = reader.readLine();
-                predictionLabels[i] = label;
+                String fullLine = reader.readLine();
+                predictionLabelsAndDesc[i] = fullLine;
             }
         }
         catch (IOException e) {
@@ -87,10 +87,24 @@ public class ResultsPage extends AppCompatActivity {
 
         StringBuilder fullPredictionString = new StringBuilder();
         for (int i = 0; i<3; i++) {
-            String data = String.format(Locale.getDefault(), "%s: %1.2f", predictionLabels[i], predictionsArray[i]) + "%";
+            String[] labelDescriptionArr = predictionLabelsAndDesc[i].split(";",3);
+            String data = String.format(Locale.getDefault(), "%s: %1.2f", labelDescriptionArr[0], predictionsArray[i]) + "%";
             if (i == 2) {
                 fullPredictionString.append(data);
             } else {
+                if (i == 0) {
+                    String topDescription = labelDescriptionArr[1];
+                    String[] newLineDescArr = topDescription.split("\\\\n",0);
+                    StringBuilder fullDesc = new StringBuilder();
+                    for (String s : newLineDescArr) {
+                        fullDesc.append(s).append("\n\n");
+                    }
+                    TextView description = findViewById(R.id.descriptionText);
+                    description.setText(fullDesc);
+
+                    String topLink = labelDescriptionArr[2];
+
+                }
                 fullPredictionString.append(data).append("\n");
             }
         }
@@ -107,13 +121,13 @@ public class ResultsPage extends AppCompatActivity {
                 String ltmp;
                 if (predictArray[i] < predictArray[j]) {
                     tmp = predictArray[i];
-                    ltmp = predictionLabels[i];
+                    ltmp = predictionLabelsAndDesc[i];
 
                     predictArray[i] = predictArray[j];
-                    predictionLabels[i] = predictionLabels[j];
+                    predictionLabelsAndDesc[i] = predictionLabelsAndDesc[j];
 
                     predictArray[j] = tmp;
-                    predictionLabels[j] = ltmp;
+                    predictionLabelsAndDesc[j] = ltmp;
                 }
             }
         }

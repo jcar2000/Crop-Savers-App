@@ -1,5 +1,0 @@
-Apple Scab
-Black Rot
-Cedar Apple Rust
-Healthy Leaf
-No Leaf Detected
