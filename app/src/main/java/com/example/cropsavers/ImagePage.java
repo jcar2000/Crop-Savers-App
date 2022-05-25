@@ -19,6 +19,7 @@ import com.example.cropsavers.ml.MobileGrapeModel;
 import com.example.cropsavers.ml.MobilePeachModel;
 import com.example.cropsavers.ml.MobilePepperModel;
 import com.example.cropsavers.ml.MobilePotatoModel;
+import com.example.cropsavers.ml.MobileStrawberryModel;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -161,6 +162,12 @@ public class ImagePage extends AppCompatActivity {
                 } else if (species.contentEquals("Potato")) {
                     MobilePotatoModel model = MobilePotatoModel.newInstance(this);
                     MobilePotatoModel.Outputs outputs = model.process(inputFeature0);
+                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                    resultsArray = outputFeature0.getFloatArray();
+                    model.close();
+                } else if (species.contentEquals("Strawberry")) {
+                    MobileStrawberryModel model = MobileStrawberryModel.newInstance(this);
+                    MobileStrawberryModel.Outputs outputs = model.process(inputFeature0);
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
                     resultsArray = outputFeature0.getFloatArray();
                     model.close();
