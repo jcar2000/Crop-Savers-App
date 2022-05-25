@@ -20,6 +20,7 @@ import com.example.cropsavers.ml.MobilePeachModel;
 import com.example.cropsavers.ml.MobilePepperModel;
 import com.example.cropsavers.ml.MobilePotatoModel;
 import com.example.cropsavers.ml.MobileStrawberryModel;
+import com.example.cropsavers.ml.MobileTomatoModel;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -171,12 +172,14 @@ public class ImagePage extends AppCompatActivity {
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
                     resultsArray = outputFeature0.getFloatArray();
                     model.close();
-                } else {
-                    MobileAppleModel model = MobileAppleModel.newInstance(this);
-                    MobileAppleModel.Outputs outputs = model.process(inputFeature0);
+                } else if (species.contentEquals("Tomato")) {
+                    MobileTomatoModel model = MobileTomatoModel.newInstance(this);
+                    MobileTomatoModel.Outputs outputs = model.process(inputFeature0);
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
                     resultsArray = outputFeature0.getFloatArray();
                     model.close();
+                } else {
+                    errorText.setText("unknown error with model, please restart...");
                 }
             } catch (Exception e) {
                 Log.d("myapp", "error with model predictions");

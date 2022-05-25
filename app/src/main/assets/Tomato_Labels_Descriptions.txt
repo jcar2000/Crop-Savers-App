@@ -1,0 +1,11 @@
+No Leaf Detected;The captured image does not contain an easily identifiable leaf.\nPlease start again with a new image...;None
+Bacterial Spot;;
+Early Blight;;
+Late Blight;;
+Leaf Mold;;
+Septoria Leaf Spot;;
+Two-Spotted Spider Mites;;
+Target Spot;;
+Yellow Leaf Curl Virus;;
+Mosaic Virus;;
+Healthy Leaf;No disease was detected, the captured leaf is healthy.;None

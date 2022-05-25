@@ -20,7 +20,7 @@ public class ResultsPage extends AppCompatActivity {
 
     // Arrays for predictions and their corresponding labels
     private float[] predictionsArray;
-    private final String[] predictionLabelsAndDesc = new String[10];
+    private final String[] predictionLabelsAndDesc = new String[15];
 
     // ON PAGE CREATE
     @Override
@@ -71,7 +71,7 @@ public class ResultsPage extends AppCompatActivity {
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open(labelFileName)));
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 15; i++) {
                 String fullLine = reader.readLine();
                 predictionLabelsAndDesc[i] = fullLine;
             }
