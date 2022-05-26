@@ -2,80 +2,148 @@ package com.example.cropsavers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cropsavers.ml.MobileAppleModel;
 import com.example.cropsavers.ml.MobileCherryModel;
-import com.example.cropsavers.ml.MobileCornModel;
-import com.example.cropsavers.ml.MobileGrapeModel;
-import com.example.cropsavers.ml.MobilePeachModel;
-import com.example.cropsavers.ml.MobilePepperModel;
-import com.example.cropsavers.ml.MobilePotatoModel;
-import com.example.cropsavers.ml.MobileStrawberryModel;
-import com.example.cropsavers.ml.MobileTomatoModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.ml.modeldownloader.CustomModel;
+import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions;
+import com.google.firebase.ml.modeldownloader.DownloadType;
+import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader;
 
 import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.Interpreter;
+import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.util.Arrays;
 
 public class ImagePage extends AppCompatActivity {
-    // Define species string
+    private static final String TAG = "myapp";
+    private Button homeButton;
+    private Button infoButton;
+    private Button backButton;
+    private Button predictButton;
+
+    private TextView errorText;
     String species = null;
 
-    // Define photo and display imageview variables
-    Bitmap photo = null;
-    ImageView selectedImageDisplay;
-    TextView errorText;
+    // Define the pic id
+    private static final int pic_id = 123;
+    Button camera_open_id;
+    ImageView click_image_id;
 
-    // ON PAGE CREATE
+    Interpreter interpreter;
+    Bitmap photo = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_page);
         
-        // get selected species type from last screen and set title
+        
         Intent selectedSpecies = getIntent();
         species = selectedSpecies.getStringExtra("species");
         ((TextView)findViewById(R.id.header)).setText(species.concat(" Detection"));
 
-        // set variables for image display imageview and error text below it
-        selectedImageDisplay = findViewById(R.id.Image);
-        errorText = findViewById(R.id.noPhotoErrorText);
+
+        camera_open_id = findViewById(R.id.takePhotoButton);
+        click_image_id = findViewById(R.id.Image);
+
+        camera_open_id.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v)
+            {
+
+                // Create the camera_intent ACTION_IMAGE_CAPTURE
+                // it will open the camera for capture the image
+                Intent camera_intent
+                        = new Intent(MediaStore
+                        .ACTION_IMAGE_CAPTURE);
+
+                // Start the activity with camera_intent,
+                // and request pic id
+                startActivityForResult(camera_intent, pic_id);
+            }
+        });
+
+        Button uploadButton = findViewById(R.id.uploadPhotoButton);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPhotoLibrary();
+            }
+        });
+
 
         //Buttons //////////////////////////////////////////////////////////////////
         // button logic for home button
-        Button homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(v -> openHomePage());
+        homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHomePage();
+            }
+        });
 
         // button logic for info button
-        Button infoButton = findViewById(R.id.infoButton);
-        infoButton.setOnClickListener(v -> openInfoPage());
+        infoButton = findViewById(R.id.infoButton);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInfoPage();
+            }
+        });
 
         // button logic for back button
-        Button backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(v -> goBack());
+        infoButton = findViewById(R.id.backButton);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBack();
+            }
+        });
 
         // button logic for photo upload button
-        Button uploadButton = findViewById(R.id.uploadPhotoButton);
-        uploadButton.setOnClickListener(v -> openPhotoLibrary());
+        infoButton = findViewById(R.id.uploadPhotoButton);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPhotoLibrary();
+            }
+        });
 
         // button logic for predict button
-        Button predictButton = findViewById(R.id.predictButton);
-        predictButton.setOnClickListener(v -> openPredictionsPage());
-
-        Button takePhotoButton = findViewById(R.id.takePhotoButton);
-        takePhotoButton.setOnClickListener(v -> openCameraFunction());
+        infoButton = findViewById(R.id.predictButton);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPredictionsPage();
+            }
+        });
         ////////////////////////////////////////////////////////////////////////////
     }
 
@@ -95,160 +163,115 @@ public class ImagePage extends AppCompatActivity {
     }
 
     public void openPhotoLibrary() {
-        // create an intent for a photo library instance to select an image
+        // create an instance of the
+        // intent of the type image
         Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        // open the intent and pass the selected image and request code
-        startActivityForResult(i, 2);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(i, 124);
     }
 
-    private void openCameraFunction() {
-        // create an intent for a camera instance to take a new photo
-        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // open the intent and pass the taken photo and request code
-        startActivityForResult(camera_intent, 1);
-    }
 
-    // function to pass image into the required model and pass the predicted
-    // probabilities to the results page
     public void openPredictionsPage() {
-        if (selectedImageDisplay.getDrawable() == null) {
+        click_image_id = findViewById(R.id.Image);
+        errorText = findViewById(R.id.noPhotoErrorText);
+        if (click_image_id.getDrawable() == null) {
             errorText.setText("No photo added... Please add a photo");
         }
         else {
-            float[] resultsArray = null;
 
-            // process bitmap image into a ByteBuffer and then into a TensorBuffer
-            ByteBuffer byteBuffer = convertBitmapToByteBuffer(photo);
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
-            inputFeature0.loadBuffer(byteBuffer);
-
-            // use correct ml model for the selected crop species
             try {
+                float[] resultsArray = null;
+
+                // process image
+                Bitmap bitmap = Bitmap.createScaledBitmap(photo, 224, 224, false);
+                ByteBuffer byteBuffer = convertBitmapToByteBuffer(bitmap);
+                TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                inputFeature0.loadBuffer(byteBuffer);
+
                 if (species.contentEquals("Apple")) {
                     MobileAppleModel model = MobileAppleModel.newInstance(this);
                     MobileAppleModel.Outputs outputs = model.process(inputFeature0);
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
                     resultsArray = outputFeature0.getFloatArray();
                     model.close();
-                } else if (species.contentEquals("Cherry")) {
+                }
+                else if (species.contentEquals("Cherry")) {
                     MobileCherryModel model = MobileCherryModel.newInstance(this);
                     MobileCherryModel.Outputs outputs = model.process(inputFeature0);
                     TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
                     resultsArray = outputFeature0.getFloatArray();
                     model.close();
-                } else if (species.contentEquals("Corn")) {
-                    MobileCornModel model = MobileCornModel.newInstance(this);
-                    MobileCornModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else if (species.contentEquals("Grape")) {
-                    MobileGrapeModel model = MobileGrapeModel.newInstance(this);
-                    MobileGrapeModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else if (species.contentEquals("Peach")) {
-                    MobilePeachModel model = MobilePeachModel.newInstance(this);
-                    MobilePeachModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else if (species.contentEquals("Pepper")) {
-                    MobilePepperModel model = MobilePepperModel.newInstance(this);
-                    MobilePepperModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else if (species.contentEquals("Potato")) {
-                    MobilePotatoModel model = MobilePotatoModel.newInstance(this);
-                    MobilePotatoModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else if (species.contentEquals("Strawberry")) {
-                    MobileStrawberryModel model = MobileStrawberryModel.newInstance(this);
-                    MobileStrawberryModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else if (species.contentEquals("Tomato")) {
-                    MobileTomatoModel model = MobileTomatoModel.newInstance(this);
-                    MobileTomatoModel.Outputs outputs = model.process(inputFeature0);
-                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                    resultsArray = outputFeature0.getFloatArray();
-                    model.close();
-                } else {
-                    errorText.setText("unknown error with model, please restart...");
                 }
-            } catch (Exception e) {
-                Log.d("myapp", "error with model predictions");
-            }
 
-            // add required information to results page intent and start activity
-            Intent intent = new Intent(this, ResultsPage.class);
-            //convert bitmap image to byteArray to be able to pass to results page
-            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG, 50, bs);
-            intent.putExtra("predictionImage", bs.toByteArray());
-            intent.putExtra("predictions", resultsArray);
-            intent.putExtra("species", species);
-            startActivity(intent);
+                else {
+                    MobileAppleModel model = MobileAppleModel.newInstance(this);
+                    MobileAppleModel.Outputs outputs = model.process(inputFeature0);
+                    TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                    resultsArray = outputFeature0.getFloatArray();
+                    model.close();
+                }
+
+                for (int i = 0; i < resultsArray.length; i++) {
+                    Log.d("myapp", String.valueOf(resultsArray[i]));
+                }
+
+                Intent intent = new Intent(this, ResultsPage.class);
+                //convert bitmap image to byteArray
+                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                photo.compress(Bitmap.CompressFormat.JPEG, 100, bs);
+                intent.putExtra("predictionImage", bs.toByteArray());
+                intent.putExtra("predictions", resultsArray);
+                intent.putExtra("species", species);
+                startActivity(intent);
+
+            } catch (IOException e) {
+                errorText.setText("error");
+            }
         }
     }
 
-    // This method will help to retrieve the images
+    // This method will help to retrieve the image
     protected void onActivityResult(int requestCode,
                                     int resultCode,
                                     Intent data) {
 
         // Match the request 'pic id with requestCode
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == pic_id) {
 
-        // Camera Function
-        if (requestCode == 1) {
-            try {
-                Bitmap img = (Bitmap) data.getExtras().get("data");
-                photo = img;
-                // Set the image in imageview for display
-                selectedImageDisplay.setBackground(null);
-                selectedImageDisplay.setImageBitmap(img);
-                errorText.setText("");
-            }
-            catch (Exception  e) {
-                Log.d("myapp", "error with camera function");
-            }
+            // BitMap is data structure of image file
+            // which store the image in memory
+            Bitmap img = (Bitmap) data.getExtras()
+                    .get("data");
+            photo = img;
+            click_image_id.setBackground(null);
+            // Set the image in imageview for display
+            click_image_id.setImageBitmap(img);
         }
-
-        // Photo Library
-        else if (requestCode == 2)
+        else if (requestCode == 124)
         {
             try {
                 if(data != null){
                     // Get the url of the image from data
                     Uri selectedImageUri = data.getData();
                     // update the preview image in the layout
-                    Bitmap img;
+                    Bitmap img = null;
                     img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
                     photo = img;
-                    // Set the image in imageview for display
-                    selectedImageDisplay.setBackground(null);
-                    selectedImageDisplay.setImageBitmap(img);
-                    errorText.setText("");
+                    click_image_id.setBackground(null);
+                    click_image_id.setImageBitmap(img);
                 }
             }
-            catch (Exception  e) {
-                Log.d("myapp", "error with photo library");
-            }
+            catch (IOException e) {}
         }
     }
 
-
-    // function to convert an image bitmap into a normalized bytebuffer to be used as an input for the ml model
     private ByteBuffer convertBitmapToByteBuffer(Bitmap bp) {
-        ByteBuffer imgData = ByteBuffer.allocateDirect(Float.BYTES*224*224*3); // allocate required memory
+        ByteBuffer imgData = ByteBuffer.allocateDirect(Float.BYTES*224*224*3);
         imgData.order(ByteOrder.nativeOrder());
-        Bitmap bitmap = Bitmap.createScaledBitmap(bp,224,224,true); // scale the bitmap dimensions to required size for model input
+        Bitmap bitmap = Bitmap.createScaledBitmap(bp,224,224,true);
         int [] intValues = new int[224*224];
         bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 
