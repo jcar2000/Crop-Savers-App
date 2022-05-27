@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,11 @@ public class ResultsPage extends AppCompatActivity {
         // button logic for info button
         Button infoButton = findViewById(R.id.infoButton);
         infoButton.setOnClickListener(v -> openInfoPage());
+
+        // button logic for back button
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
+
         ///////////////////////////////////////////////////////////////////////////
     }
 
@@ -89,9 +95,8 @@ public class ResultsPage extends AppCompatActivity {
         for (int i = 0; i<3; i++) {
             String[] labelDescriptionArr = predictionLabelsAndDesc[i].split(";",3);
             String data = String.format(Locale.getDefault(), "%s: %1.2f", labelDescriptionArr[0], predictionsArray[i]) + "%";
-            if (i == 2) {
-                fullPredictionString.append(data);
-            } else {
+
+      {
                 if (i == 0) {
                     String topDescription = labelDescriptionArr[1];
                     String[] newLineDescArr = topDescription.split("\\\\n",0);
@@ -102,8 +107,45 @@ public class ResultsPage extends AppCompatActivity {
                     TextView description = findViewById(R.id.descriptionText);
                     description.setText(fullDesc);
 
+                    TextView nameDescription = findViewById(R.id.descriptionNameText);
+                    nameDescription.setText(labelDescriptionArr[0]);
+
                     String topLink = labelDescriptionArr[2];
 
+                }
+                if (i == 1) {
+                    String topDescription = labelDescriptionArr[1];
+                    String[] newLineDescArr = topDescription.split("\\\\n",0);
+                    StringBuilder fullDesc = new StringBuilder();
+                    for (String s : newLineDescArr) {
+                        fullDesc.append(s).append("\n\n");
+                    }
+                    TextView description = findViewById(R.id.descriptionText1);
+                    description.setText(fullDesc);
+
+                    TextView nameDescription = findViewById(R.id.descriptionNameText1);
+                    nameDescription.setText(labelDescriptionArr[0]);
+
+                    String topLink = labelDescriptionArr[2];
+
+                }
+
+                if (i == 2) {
+                    String topDescription = labelDescriptionArr[1];
+                    String[] newLineDescArr = topDescription.split("\\\\n",0);
+                    StringBuilder fullDesc = new StringBuilder();
+                    for (String s : newLineDescArr) {
+                        fullDesc.append(s).append("\n\n");
+                    }
+                    TextView description = findViewById(R.id.descriptionText2);
+                    description.setText(fullDesc);
+
+                    TextView nameDescription = findViewById(R.id.descriptionNameText2);
+                    nameDescription.setText(labelDescriptionArr[0]);
+
+                    String topLink = labelDescriptionArr[2];
+
+//                    fullPredictionString.append(data);
                 }
                 fullPredictionString.append(data).append("\n");
             }

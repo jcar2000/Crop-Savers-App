@@ -21,10 +21,11 @@
         <entry key="..\:/Users/carri/AndroidStudioProjects/CropSavers/app/src/main/res/layout/activity_results_page.xml" value="0.33" />
         <entry key="..\:/Users/carri/AndroidStudioProjects/CropSavers/app/src/main/res/layout/activity_species_page.xml" value="0.16" />
         <entry key="..\:/Users/carri/AndroidStudioProjects/CropSavers/app/src/main/res/layout/fragment_image_classification_page.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/drawable/ic_card_pepper_icon.xml" value="0.2575" />
         <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/layout/activity_image_page.xml" value="0.176" />
         <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/layout/activity_info_page.xml" value="0.1" />
         <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/layout/activity_main.xml" value="0.16" />
-        <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/layout/activity_results_page.xml" value="0.136" />
+        <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/layout/activity_results_page.xml" value="0.16" />
         <entry key="..\:/Users/djhes/StudioProjects/Crop-Savers-App/app/src/main/res/layout/activity_species_page.xml" value="0.16" />
       </map>
     </option>
@@ -38,7 +39,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.176" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>
