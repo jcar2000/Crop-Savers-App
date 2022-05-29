@@ -1,3 +1,3 @@
-No Leaf Detected;The captured image does not contain an easily identifiable leaf.\nPlease start again with a new image...;None
-Bacterial Spot;;
+No Leaf Detected;The captured image does not contain an easily identifiable leaf.;None
+Bacterial Spot;Bacterial leaf spot, caused by Xanthomonas campestris pv. vesicatoria, is the most common and destructive disease for peppers. \nDisease symptoms can appear throughout the above-ground portion of the plant, which may include leaf spot, fruit spot and stem canker. However, early symptoms show up as water-soaked lesions on leaves that can quickly change from green to dark brown and enlarge into spots that are up to 1/4 inch in diameter with slightly raised margins. \nBacterial leaf spot can devastate a pepper crop by early defoliation of infected leaves and disfiguring fruit. In severe cases, plants may die as it is extremely difficult to find a cure once the disease takes hold. \n;https://extension.wvu.edu/lawn-gardening-pests/plant-disease/fruit-vegetable-diseases/bacterial-leaf-spot-of-pepper
 Healthy Leaf;No disease was detected, the captured leaf is healthy.;None

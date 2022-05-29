@@ -1,3 +1,3 @@
-No Leaf Detected;The captured image does not contain an easily identifiable leaf.\nPlease start again with a new image...;None
-Powdery Mildew;;
+No Leaf Detected;The captured image does not contain an easily identifiable leaf.;None
+Powdery Mildew;Powdery Mildew (Podosphaera cerasi) is a fungus that most commonly infects young, expanding leaves but can also be found on buds, fruit and fruit stems. \nThe first symptom is usually a light-green, circular lesion on either leaf surface. A subtle white cotton-like growth develops in the infected area. \nSevere leaf infection can result in curling and/or blistering, and leaves are covered with the characteristic white cotton-like growth.;https://pnwhandbooks.org/plantdisease/host-disease/cherry-prunus-spp-powdery-mildew
 Healthy Leaf;No disease was detected, the captured leaf is healthy.;None

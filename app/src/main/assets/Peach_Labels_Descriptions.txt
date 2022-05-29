@@ -1,3 +1,3 @@
-No Leaf Detected;The captured image does not contain an easily identifiable leaf.\nPlease start again with a new image...;None
-Bacterial Spot;;
+No Leaf Detected;The captured image does not contain an easily identifiable leaf.;None
+Bacterial Spot;Bacterial leaf spot of peach, also known as bacterial shot hole, is a common disease on older peach trees and nectarines caused by the bacterium Xanthomonas campestris pv. pruni. \nBacterial spot on peach trees results in loss of fruit and the overall malaise of trees caused by recurrent defoliation. \nThe most characteristic sign of peach tree leaf spot are angular purple to purple-brown spots on foliage, followed by the center of lesion falling out, giving the leaves a “shot hole” appearance. Leaves soon turn yellow and drop.;https://www.gardeningknowhow.com/edible/fruits/peach/bacterial-spot-on-peach-trees.htm
 Healthy Leaf;No disease was detected, the captured leaf is healthy.;None

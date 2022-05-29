@@ -95,8 +95,6 @@ public class ResultsPage extends AppCompatActivity {
         for (int i = 0; i<3; i++) {
             String[] labelDescriptionArr = predictionLabelsAndDesc[i].split(";",3);
             String data = String.format(Locale.getDefault(), "%s: %1.2f", labelDescriptionArr[0], predictionsArray[i]) + "%";
-
-      {
                 if (i == 0) {
                     String topDescription = labelDescriptionArr[1];
                     String[] newLineDescArr = topDescription.split("\\\\n",0);
@@ -111,6 +109,8 @@ public class ResultsPage extends AppCompatActivity {
                     nameDescription.setText(labelDescriptionArr[0]);
 
                     String topLink = labelDescriptionArr[2];
+                    TextView linkTextView = findViewById(R.id.linkText);
+                    linkTextView.setText("Learn more at: " + topLink);
 
                 }
                 if (i == 1) {
@@ -127,7 +127,8 @@ public class ResultsPage extends AppCompatActivity {
                     nameDescription.setText(labelDescriptionArr[0]);
 
                     String topLink = labelDescriptionArr[2];
-
+                    TextView linkTextView = findViewById(R.id.linkText2);
+                    linkTextView.setText("Learn more at: " + topLink);
                 }
 
                 if (i == 2) {
@@ -144,11 +145,10 @@ public class ResultsPage extends AppCompatActivity {
                     nameDescription.setText(labelDescriptionArr[0]);
 
                     String topLink = labelDescriptionArr[2];
-
-//                    fullPredictionString.append(data);
+                    TextView linkTextView = findViewById(R.id.linkText3);
+                    linkTextView.setText("Learn more at: " + topLink);
                 }
                 fullPredictionString.append(data).append("\n");
-            }
         }
         TextView predictionText = findViewById(R.id.Prediction1);
         predictionText.setText(fullPredictionString.toString());

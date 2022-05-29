@@ -157,6 +157,19 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
+                android:id="@+id/linkText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="learn more"
+                android:autoLink="web"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,7 +180,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+                app:layout_constraintTop_toBottomOf="@+id/linkText"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -197,6 +210,19 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
+                android:id="@+id/linkText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="learn more"
+                android:autoLink="web"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText1"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
                 android:id="@+id/descriptionNameText2"
                 style="@android:style/Widget.TextView.SpinnerItem"
                 android:layout_width="wrap_content"
@@ -206,7 +232,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionText1"
+                app:layout_constraintTop_toBottomOf="@+id/linkText2"
                 app:layout_constraintVertical_bias="0.31" />
             <TextView
                 android:id="@+id/descriptionText2"
@@ -220,6 +246,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionNameText2"
                 app:layout_constraintVertical_bias="0.152"/>
+
+            <TextView
+                android:id="@+id/linkText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="learn more"
+                android:autoLink="web"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText2"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

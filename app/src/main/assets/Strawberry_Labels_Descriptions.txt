@@ -1,3 +1,3 @@
-No Leaf Detected;The captured image does not contain an easily identifiable leaf.\nPlease start again with a new image...;None
-Leaf Scorch;;
+No Leaf Detected;The captured image does not contain an easily identifiable leaf.;None
+Leaf Scorch;Scorched strawberry leaves are caused by a fungal infection which affects the foliage of strawberry plantings. The fungus responsible is called Diplocarpon earliana. Strawberries with leaf scorch may first show signs of issue with the development of small purplish blemishes that occur on the topside of leaves. \nThough the foliage of the infected plants is not aesthetically pleasing, it is seldom that the presence of this fungus impacts the quality of the strawberry crop itself.;https://www.gardeningknowhow.com/edible/fruits/strawberry/strawberries-with-leaf-scorch.htm
 Healthy Leaf;No disease was detected, the captured leaf is healthy.;None
