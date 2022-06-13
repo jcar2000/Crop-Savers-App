@@ -1,9 +1,6 @@
 package com.example.cropsavers;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +31,6 @@ public class ImagePage extends AppCompatActivity {
     Bitmap photo = null;
     ImageView selectedImageDisplay;
     TextView errorText;
-    private Uri mImageCaptureUri;
     // ON PAGE CREATE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,20 +82,10 @@ public class ImagePage extends AppCompatActivity {
         startActivityForResult(i, 2);
     }
     private void openCameraFunction() {
-        // Old Camera Method::
         // create an intent for a camera instance to take a new photo
-        //Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // open the intent and pass the taken photo and request code
-        //startActivityForResult(camera_intent, 1);
-
-        ContentValues values = new ContentValues();
-        mImageCaptureUri = getContentResolver().insert(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
-        startActivityForResult(intent, 1);
-
-
+        startActivityForResult(camera_intent, 1);
     }
     // function to pass image into the required model and pass the predicted
     // probabilities to the results page
@@ -179,7 +165,7 @@ public class ImagePage extends AppCompatActivity {
             Intent intent = new Intent(this, ResultsPage.class);
             //convert bitmap image to byteArray to be able to pass to results page
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG, 60, bs);
+            photo.compress(Bitmap.CompressFormat.JPEG, 50, bs);
             intent.putExtra("predictionImage", bs.toByteArray());
             intent.putExtra("predictions", resultsArray);
             intent.putExtra("species", species);
@@ -195,22 +181,12 @@ public class ImagePage extends AppCompatActivity {
         // Camera Function
         if (requestCode == 1) {
             try {
-                Bitmap img;
-                img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageCaptureUri);
+                Bitmap img = (Bitmap) data.getExtras().get("data");
                 photo = img;
                 // Set the image in imageview for display
                 selectedImageDisplay.setBackground(null);
                 selectedImageDisplay.setImageBitmap(img);
                 errorText.setText("");
-
-
-                // old camera method::
-                //Bitmap img = (Bitmap) data.getExtras().get("data");
-                //photo = img;
-                //Set the image in imageview for display
-                //selectedImageDisplay.setBackground(null);
-                //selectedImageDisplay.setImageBitmap(img);
-                //errorText.setText("");
             }
             catch (Exception  e) {
                 Log.d("myapp", "error with camera function");
@@ -256,14 +232,5 @@ public class ImagePage extends AppCompatActivity {
             }
         }
         return imgData;
-    }
-
-    public String getRealPathFromURI(Uri contentUri) {
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
-        int column_index = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
     }
 }
